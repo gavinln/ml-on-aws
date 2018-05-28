@@ -13,7 +13,6 @@
 
   roles:
     - geerlingguy.ntp
-    - stefangweichinger.rclone
 
   tasks:
     - include: init-setup.yml

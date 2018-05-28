@@ -54,7 +54,7 @@ Vagrant.configure(2) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
 
-  config.vm.define "keras-on-aws", autostart: true do |machine|
+  config.vm.define "ml-on-aws", autostart: true do |machine|
     machine.vm.provider "virtualbox" do |vb|
       # vb.gui = true
       vb.memory = "2048"
@@ -74,7 +74,7 @@ Vagrant.configure(2) do |config|
 #         machine.vm.network "public_network", bridge: "eth0"
 #     end
 
-    machine.vm.hostname = "keras-on-aws"
+    machine.vm.hostname = "ml-on-aws"
     machine.vm.network "private_network", ip: "192.168.33.10"
 
     machine.vm.provision "ansible_local" do |ansible|

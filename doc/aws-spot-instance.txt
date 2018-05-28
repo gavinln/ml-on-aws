@@ -53,7 +53,7 @@ ansible-playbook ubuntu-update.yml -b -i keras, -e $ANSIBLE_PY
 9. Install useful utilities
 ansible-playbook cli-setup.yml -b -i keras, -e $ANSIBLE_PY
 
-9. Patch Tensorflow conda setup
+9. Patch Tensorflow conda setup (may not need)
 ansible-playbook patch-conda-setup.yml -b -i keras, -e $ANSIBLE_PY
 
 Run the Jupyter notebook

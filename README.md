@@ -121,28 +121,54 @@ work on Windows, Mac and Linux operating systems.
 ## 6. Setup fastai code
 
 1. Connect to the AWS machine
-ec2 tunnel $INST_ID
+
+    ```
+    ec2 tunnel $INST_ID
+    ```
 
 2. Clone the fastai code
-git clone https://github.com/fastai/fastai.git
+
+    ```
+    git clone https://github.com/fastai/fastai.git
+    ```
 
 3. Change to the fastai code directory
-cd fastai
+
+    ```
+    cd fastai
+    ```
 
 4. Create the conda gpu environment
-conda env create -f environment.yml
+
+    ```
+    conda env create -f environment.yml
+    ```
 
 5. Call this if needed - jupyter notebook not starting up
-jupyter notebook --generate-config
+
+    ```
+    jupyter notebook --generate-config
+    ```
 
 6. Activate the environmnet
-source activate fastai
+
+    ```
+    source activate fastai
+    ```
 
 7. Start the jupyter notebook
-jupyter notebook
 
+    ```
+    jupyter notebook
+    ```
 
-## Requirements
+## 7. Links
+
+[Download link with curl or wget][dlwcow]
+
+[dlwcow]: https://chrome.google.com/webstore/detail/curlwget/jmocjfidanebdlinpbcdkcmgdifblncg
+
+## 8. Requirements
 
 The following software is needed to get the software from github and run
 Vagrant. The Git environment also provides an [SSH client][200] for Windows.

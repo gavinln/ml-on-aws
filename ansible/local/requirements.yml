@@ -1,4 +1,3 @@
 ---
  - src: geerlingguy.ntp
-
- - src: stefangweichinger.rclone
+   version: 1.5.3
