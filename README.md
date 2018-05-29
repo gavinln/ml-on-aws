@@ -156,7 +156,29 @@ work on Windows, Mac and Linux operating systems.
     source activate fastai
     ```
 
-7. Start the jupyter notebook
+7. Install missing libraries
+conda install -y bcolz
+conda install -y opencv
+pip install pandas_summary
+
+8. Replace the two lines
+# from fastai.structured import *
+# from fastai.column_data import *
+import numpy as np
+import pandas as pd
+from pandas_summary import DataFrameSummary
+from fastai.structured import add_datepart
+import math
+import re
+import datetime
+from isoweek import Week
+from fastai.structured import proc_df
+from fastai.structured import add_datepart
+from fastai.structured import apply_cats
+from fastai.column_data import ColumnarModelData
+from fastai.dataset import split_by_idx
+
+9. Start the jupyter notebook
 
     ```
     jupyter notebook

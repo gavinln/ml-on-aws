@@ -31,19 +31,4 @@
     state=present
     insertafter=EOF
     create=True
-  become_user: ubuntu
-
-  # - name: download awless
-  #   get_url:
-  #     url: https://github.com/wallix/awless/releases/download/{{ awless }}/awless-linux-amd64.tar.gz
-  #     dest: /home/ubuntu/awless-linux-amd64.tar.gz
-  #     owner: ubuntu
-  #     group: ubuntu
-
-  # - name: untar awless
-  #   unarchive:
-  #     src: /home/ubuntu/awless-linux-amd64.tar.gz
-  #     dest: /home/ubuntu
-  #     owner: ubuntu
-  #     group: ubuntu
-
+  become_user: vagrant
