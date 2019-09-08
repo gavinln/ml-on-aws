@@ -33,7 +33,7 @@ INSTANCE_PRICE = 0.05
 IMAGE_ID = 'ami-82f4dae7'  # Ubuntu Server 16.04 LTS (HVM), SSD VolType 64 bit
 SECURITY_GROUP_ID = 'sg-50664438'
 
-#  aws ec2 describe-images --filters "Name=name,Values=Deep Learning AMI (Ubuntu)*" | jq '.Images[] | [ .Name, .Description, .ImageId]'
+# aws ec2 describe-images --filters Name="name",Values="Deep Learning AMI (Ubuntu)*" --query "Images[*].[CreationDate, Name, Description]" --output text
 def deep_learning_ami():
     return {
         'us-east-2': 'ami-e4f4c981',

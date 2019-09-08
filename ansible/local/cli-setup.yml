@@ -14,6 +14,9 @@
 - name: Install vim
   apt: name=vim state=installed
 
+- name: Install jid to interactively filter json
+  apt: name=jid state=installed
+
 - name: Install autojump
   apt: name=autojump state=installed
   register: autojump_status

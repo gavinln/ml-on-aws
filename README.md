@@ -28,33 +28,33 @@ work on Windows, Mac and Linux operating systems.
 
 1. Change to the ml-on-aws root directory
 
-    ```
-    cd ml-on-aws
-    ```
+```
+cd ml-on-aws
+```
 
 2. Create a do_not_checkin directory ignored by Git for AWS credentials.
 
-    ```
-    mkdir do_not_checkin
-    ```
+```
+mkdir do_not_checkin
+```
 
 3. Make sure you have a new verion of Vagrant (1.9.1 or higher)
 
-    ```
-    vagrant -v
-    ```
+```
+vagrant -v
+```
 
 4. Start the Virtual machine (VM)
 
-    ```
-    vagrant up
-    ```
+```
+vagrant up
+```
 
 5. Login to the VM
 
-    ```
-    vagrant ssh
-    ```
+```
+vagrant ssh
+```
 
 
 ## [3. Setup the keras-vm user on AWS](doc/setup-keras-user.md)
@@ -63,134 +63,90 @@ work on Windows, Mac and Linux operating systems.
 
 1. List all tasks (optional)
 
-    ```
-    ec2 -l
-    ```
+```
+ec2 -l
+```
 
 2. Get parameters for configure task (optional)
 
-    ```
-    ec2 -h configure
-    ```
+```
+ec2 -h configure
+```
 
 3. Setup AWS configuration
 
-    ```
-    ec2 configure /vagrant/do_not_checkin/credentials.csv
-    ```
+```
+ec2 configure /vagrant/do_not_checkin/credentials.csv
+```
 
 4. Set AWS default region - Ohio, US
 
-    ```
-    aws configure set default.region us-east-2
-    ```
+```
+aws configure set default.region us-east-2
+```
 
 5. Display AWS identity (optional)
 
-    ```
-    aws sts get-caller-identity
-    ```
+```
+aws sts get-caller-identity
+```
 
 5. Display AWS configuration (optional)
 
-    ```
-    aws configure list
-    ```
+```
+aws configure list
+```
 
 7. Setup SSH key
 
-    ```
-    export KEY_NAME=keras-vm
-    if [[ ! -s /vagrant/do_not_checkin/$KEY_NAME.pem ]]; then
-        ec2 ckp --name $KEY_NAME > /vagrant/do_not_checkin/$KEY_NAME.pem
-    fi
-    export ANSIBLE_PRIVATE_KEY_FILE=~/$KEY_NAME.pem
-    cp -f /vagrant/do_not_checkin/$KEY_NAME.pem $ANSIBLE_PRIVATE_KEY_FILE
-    chmod 400 $ANSIBLE_PRIVATE_KEY_FILE
-    ```
+```
+export KEY_NAME=keras-vm
+if [[ ! -s /vagrant/do_not_checkin/$KEY_NAME.pem ]]; then
+    ec2 ckp --name $KEY_NAME > /vagrant/do_not_checkin/$KEY_NAME.pem
+fi
+export ANSIBLE_PRIVATE_KEY_FILE=~/$KEY_NAME.pem
+cp -f /vagrant/do_not_checkin/$KEY_NAME.pem $ANSIBLE_PRIVATE_KEY_FILE
+chmod 400 $ANSIBLE_PRIVATE_KEY_FILE
+```
 
 8. Setup ssh-agent with key
 
-    ```
-    eval `ssh-agent`
-    ssh-add $ANSIBLE_PRIVATE_KEY_FILE
-    ```
+```
+eval `ssh-agent`
+ssh-add $ANSIBLE_PRIVATE_KEY_FILE
+```
+
+9. Change to scripts directory
+
+```
+cd /vagrant/code
+```
 
 ## [5. Run EC2 instance](doc/aws-spot-instance.txt)
 
-## 6. Setup fastai code
-
-1. Connect to the AWS machine
-
-    ```
-    ec2 tunnel $INST_ID
-    ```
-
-2. Clone the fastai code
-
-    ```
-    git clone https://github.com/fastai/fastai.git
-    ```
-
-3. Change to the fastai code directory
-
-    ```
-    cd fastai
-    ```
-
-4. Create the conda gpu environment
-
-    ```
-    conda env create -f environment.yml
-    ```
-
-5. Call this if needed - jupyter notebook not starting up
-
-    ```
-    jupyter notebook --generate-config
-    ```
-
-6. Activate the environmnet
-
-    ```
-    source activate fastai
-    ```
-
-7. Install missing libraries
-conda install -y bcolz
-conda install -y opencv
-pip install pandas_summary
-
-8. Replace the two lines
-# from fastai.structured import *
-# from fastai.column_data import *
-import numpy as np
-import pandas as pd
-from pandas_summary import DataFrameSummary
-from fastai.structured import add_datepart
-import math
-import re
-import datetime
-from isoweek import Week
-from fastai.structured import proc_df
-from fastai.structured import add_datepart
-from fastai.structured import apply_cats
-from fastai.column_data import ColumnarModelData
-from fastai.dataset import split_by_idx
-
-9. Start the jupyter notebook
-
-    ```
-    jupyter notebook
-    ```
-
-## 7. Links
+## 6. Links
 
 [Download link with curl or wget][dlwcow]
 
 [dlwcow]: https://chrome.google.com/webstore/detail/curlwget/jmocjfidanebdlinpbcdkcmgdifblncg
 
-## 8. Requirements
+[JMESPATH (used by AWS)][jmespath]
+
+[jmespath]: http://jmespath.org/examples.html
+
+[fire command line][fire]
+
+[fire]: https://github.com/google/python-fire/blob/master/docs/guide.md
+
+[SQL on CSV][textql]
+
+[textql]: https://github.com/dinedal/textql
+
+[CSV toolkit][csvtk]
+
+[csvtk]: https://github.com/shenwei356/csvtk
+
+## 7. Requirements
 
 The following software is needed to get the software from github and run
 Vagrant. The Git environment also provides an [SSH client][200] for Windows.

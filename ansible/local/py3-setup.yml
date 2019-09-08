@@ -16,3 +16,6 @@
 
 - name: install flake8
   pip: name=flake8 state=present executable=pip3
+
+- name: install fire
+  pip: name=fire state=present executable=pip3

@@ -8,9 +8,7 @@ ec2 sps -i p2.xlarge
 
 3. Request a spot instance
 # Deep Learning AMI (Ubuntu)
-# ec2 rsi -m ami-e4f4c981 -s $KERAS_SG -i p2.xlarge -p YourPrice  # aws ami
-ec2 rsi -m ami-791c231c -s $KERAS_SG -i p2.xlarge -p YourPrice  # deep learning
-
+ec2 rsi -m ami-0bd0eb312b384fbf0 -s $KERAS_SG -i p2.xlarge -p YourPrice  # deep learning
 
 4. Display spot requests (optional)
 ec2 dsir
@@ -26,6 +24,33 @@ ec2 ssh-init $INST_ID
 
 8. Test login to the instance. Repeat until instance starts.
 ssh keras exit
+
+Create Conda environment
+
+1. List conda environments
+conda env list
+
+2. Create a new environment
+conda create -n cudf -y python==3.6
+
+3. Activate the environment
+conda activate cudf
+
+4. Install Python libraries
+conda install -y ipython
+
+5. Install dask
+conda install -y dask
+
+6. Install cudf
+conda install -y -c nvidia -c rapidsai -c numba -c conda-forge -c defaults \
+    cudf=0.8 cudatoolkit=10.0
+
+7. Setup dask_cudf by running setup.py from python/dask_cudf/setup.py
+git clone https://github.com/rapidsai/cudf.git
+
+8. Run Python code
+python cuda_dask.py
 
 Configure machines using Ansible
 1. Setup Ansible
@@ -75,9 +100,10 @@ Saving changes to the local machine
 1. Copy changes from aws to the local machine every 60 seconds
 watch -n 60 rsync -avz --exclude '.ipynb_checkpoints' keras:~/code /vagrant
 
-Monitoring GPU
-https://github.com/mountassir/gmonitor - 45 stars
-https://github.com/Syllo/nvtop - 9 stars
+New commands
+1. List deep learning Ubuntu images
+python3 aws-cmd.py list deep-learning-ubuntu
 
-SSH productivity
-http://blogs.perl.org/users/smylers/2011/08/ssh-productivity-tips.html
+2. Describe a specified Ubuntu image
+python3 aws-cmd.py describe image ami-0bd0eb312b384fbf0
+

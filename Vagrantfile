@@ -15,7 +15,9 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/bionic64"
+
+  config.vm.box_version = "20190621.0.0"
 
   # do not update configured box
   # config.vm.box_check_update = false
@@ -66,13 +68,6 @@ Vagrant.configure(2) do |config|
         vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
       end
     end
-
-#     if Vagrant::Util::Platform.windows? then
-#         machine.vm.network "public_network"
-#     else
-#         # Linux machine with Docker has multiple network interfaces
-#         machine.vm.network "public_network", bridge: "eth0"
-#     end
 
     machine.vm.hostname = "ml-on-aws"
     machine.vm.network "private_network", ip: "192.168.33.10"
