@@ -208,10 +208,7 @@ def create_security_group(ctx):
 
     ec2 = boto3.client('ec2')
     default_vpc = get_default_vpc()
-    if not default_vpc:
-        print('Cannot find default vpc')
-        return
-
+    if default_vpc:
         vpc_id = default_vpc['VpcId']
         description = 'security group for keras-on-aws'
         sg = ec2.create_security_group(
@@ -424,7 +421,7 @@ def request_spot_instances(
     key_name = os.environ['KEY_NAME']
 
     price_num = float(price)
-    if price_num > 0.91:
+    if price_num > 0.99:
         sys.exit('spot price of {} is too high'.format(price_num))
 
     # TODO: Explore using "DeleteOnTermination": false,

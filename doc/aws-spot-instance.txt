@@ -1,14 +1,19 @@
+The Nvidia cupy and cudf
+
+https://medium.com/@rnniranjan/get-started-with-nvidia-rapids-and-xgboost-gpu-on-aws-ec2-instances-7ba6aaa0a66d
+
 Use the ec2-tasks script with alias ec2 to setup AWS
 Create an EC2 instance
 1. Create the KERAS security group
 export KERAS_SG=$(ec2 csg)
 
 2. Get spot price statistics for p2.xlarge GPU instance
-ec2 sps -i p2.xlarge
+ec2 sps -i p3.2xlarge
 
 3. Request a spot instance
 # Deep Learning AMI (Ubuntu)
-ec2 rsi -m ami-0bd0eb312b384fbf0 -s $KERAS_SG -i p2.xlarge -p YourPrice  # deep learning
+# ec2 rsi -m ami-0bd0eb312b384fbf0 -s $KERAS_SG -i p2.xlarge -p YourPrice  # deep learning
+ec2 rsi -m ami-02c253ecf7eaba73e -s $KERAS_SG -i p3.2xlarge -p YourPrice  # Sep 2019
 
 4. Display spot requests (optional)
 ec2 dsir
@@ -25,26 +30,45 @@ ec2 ssh-init $INST_ID
 8. Test login to the instance. Repeat until instance starts.
 ssh keras exit
 
-Create Conda environment
+## Setup CUDA version
 
+https://docs.aws.amazon.com/dlami/latest/devguide/tutorial-base.html
+
+1. Activate an environment
+conda activate python3
+
+1. Setup CUDA version 10.0 - MAY NOT NEED
+sudo rm /usr/local/cuda
+sudo ln -s /usr/local/cuda-10.0 /usr/local/cuda
+
+2. Change to nvidia utility directory
+cd /usr/local/cuda/samples/1_Utilities/deviceQuery
+
+3. Build nvidia utility
+sudo make
+
+4. Verify CUDA version
+./deviceQuery
+
+5. Check nvidia GPU
+nvidia-smi
+
+Create Conda environment
 1. List conda environments
 conda env list
 
 2. Create a new environment
-conda create -n cudf -y python==3.6
+conda create -n cudf -y python==3.6.6
 
 3. Activate the environment
 conda activate cudf
 
-4. Install Python libraries
-conda install -y ipython
-
-5. Install dask
-conda install -y dask
-
-6. Install cudf
+4. Install cudf
 conda install -y -c nvidia -c rapidsai -c numba -c conda-forge -c defaults \
     cudf=0.8 cudatoolkit=10.0
+
+5. Install other libraries
+conda install -y ipython requests
 
 7. Setup dask_cudf by running setup.py from python/dask_cudf/setup.py
 git clone https://github.com/rapidsai/cudf.git

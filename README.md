@@ -79,10 +79,10 @@ ec2 -h configure
 ec2 configure /vagrant/do_not_checkin/credentials.csv
 ```
 
-4. Set AWS default region - Ohio, US
+4. Set AWS default region - Oregon, US
 
 ```
-aws configure set default.region us-east-2
+aws configure set default.region us-west-2
 ```
 
 5. Display AWS identity (optional)
@@ -145,6 +145,14 @@ cd /vagrant/code
 [CSV toolkit][csvtk]
 
 [csvtk]: https://github.com/shenwei356/csvtk
+
+[cudf - nvidia version of dataframes][cudf]
+
+[cudf]: https://github.com/rapidsai/cudf
+
+[GPU cupy and cudf: first impressions][gpu_first_impression]
+
+[gpu_first_impression]: https://medium.com/rapids-ai/first-impressions-of-gpus-and-pydata-348194660e40
 
 ## 7. Requirements
 
